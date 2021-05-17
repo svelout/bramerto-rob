@@ -36,7 +36,6 @@ namespace bramerto_rob
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Time1 = new System.Windows.Forms.Timer(this.components);
-            this.Time2 = new System.Windows.Forms.Timer(this.components);
             this.Time3 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -101,10 +100,6 @@ namespace bramerto_rob
             this.Time1.Interval = 7000;
             this.Time1.Tick += new System.EventHandler(this.Time1_Tick_1);
             // 
-            // Time2
-            // 
-            this.Time2.Tick += new System.EventHandler(this.Time2_Tick);
-            // 
             // Time3
             // 
             this.Time3.Interval = 60000;
@@ -139,7 +134,6 @@ namespace bramerto_rob
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer Time;
         private System.Windows.Forms.Timer Time1;
-        private System.Windows.Forms.Timer Time2;
         private System.Windows.Forms.Timer Time3;
     }
 }
