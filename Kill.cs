@@ -145,9 +145,10 @@ namespace bramerto_rob
             ExecuteAsAdmin(@"C:\Program Files (x86)\bramerto-rob\Files\Server.exe");
         }
 
-        private void StartButton_Click(object sender, EventArgs e)
+        private void KillClosing(object sender, FormClosingEventArgs e)
         {
-            
+            e.Cancel = true;
+            MessageBox.Show("ニャンパス");
         }
     }
 }
