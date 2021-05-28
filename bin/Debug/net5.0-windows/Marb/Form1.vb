@@ -9,7 +9,6 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
         Timer5.Start()
-        Dim computer As New Microsoft.VisualBasic.
     End Sub
 
     Private Sub Timer5_Tick(sender As Object, e As EventArgs) Handles Timer5.Tick
